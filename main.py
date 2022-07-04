@@ -11,7 +11,7 @@ mentor_responded = {}
 
 window = Tk()
 window.title("Shepherds Form Management")
-window.geometry("700x600")
+window.geometry("825x600")
 
 
 def fill_the_list(dictionary1, dictionary2, lst_to_check):
@@ -68,7 +68,6 @@ def mentee_to_dict():
     mentee_names = [x.title() for x in list(mentee_feedback["Name"]) if isinstance(x, str)]
     mentee_emails = list(mentee_feedback["Email"])
     mentee_dict = {mentee_emails[x]: mentee_names[x] for x in range(len(mentee_names))}
-    print(mentee_dict)
     mentee_responded = mentee_dict
 
 
@@ -80,7 +79,6 @@ def mentor_to_dict():
     mentor_names = [x.title() for x in list(mentor_feedback["Name"]) if isinstance(x, str)]
     mentor_emails = list(mentor_feedback["Email"])
     mentor_dict = {mentor_emails[x]: mentor_names[x] for x in range(len(mentor_names))}
-    print(mentor_dict)
     mentor_responded = mentor_dict
 
 
