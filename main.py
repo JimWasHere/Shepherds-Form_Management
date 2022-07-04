@@ -11,7 +11,7 @@ mentor_responded = {}
 
 window = Tk()
 window.title("Shepherds Form Management")
-window.geometry("825x600")
+window.geometry("850x600")
 
 
 def fill_the_list(dictionary1, dictionary2, lst_to_check):
@@ -94,7 +94,8 @@ def combine2():
 
 mentor_feedback_label = Label(
     window,
-    text="Upload Mentor Feedback File in csv format"
+    text="Upload Mentor Feedback File in csv format",
+    font=("ariel", 10, "bold")
 )
 mentor_feedback_label.grid(row=0, column=0, padx=10)
 
@@ -114,7 +115,8 @@ mentor_file_label.grid(row=0, column=2, padx=10)
 
 mentee_feedback_label = Label(
     window,
-    text="Upload Mentee Feedback File in csv format"
+    text="Upload Mentee Feedback File in csv format",
+    font=("ariel", 10, "bold")
 )
 mentee_feedback_label.grid(row=1, column=0, padx=10)
 mentee_feedback_btn = Button(
@@ -132,7 +134,8 @@ mentee_file_label.grid(row=1, column=2, padx=10)
 
 intake1_label = Label(
     window,
-    text="Upload First Intake File in csv format"
+    text="Upload First Intake File in csv format",
+    font=("ariel", 10, "bold")
 )
 intake1_label.grid(row=2, column=0, padx=10)
 intake1_btn = Button(
@@ -148,7 +151,8 @@ intake1_file_label = Label(
 intake1_file_label.grid(row=2, column=2)
 intake2_label = Label(
     window,
-    text="Upload Second Intake File in csv format"
+    text="Upload Second Intake File in csv format",
+    font=("ariel", 10, "bold")
 )
 intake2_label.grid(row=3, column=0, padx=10)
 intake2_btn = Button(
@@ -165,7 +169,9 @@ intake2_file_label.grid(row=3, column=2)
 process_btn = Button(
     window,
     text="Process Files",
-    command=process_files
+    command=process_files,
+    width=100,
+
 )
 process_btn.grid(row=4, columnspan=3, pady=10)
 
