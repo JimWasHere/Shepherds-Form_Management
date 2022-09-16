@@ -4,6 +4,7 @@ from tkinter.ttk import *
 from tkinter.filedialog import askopenfilename
 import time
 import itertools
+import pyperclip
 
 intake = []
 mentee_responded = {}
@@ -46,19 +47,7 @@ def run_program():
         emails = process_intake(intake)
 
         lst = fill_the_list(mentee_responded, mentor_responded, emails)
-        pb1 = Progressbar(
-            window,
-            orient=HORIZONTAL,
-            length=300,
-            mode="determinate"
-        )
-        pb1.grid(row=5, columnspan=3, pady=20)
-        for x in range(6):
-            window.update_idletasks()
-            pb1["value"] += 20
-            time.sleep(1)
-        pb1.destroy()
-        Label(window, text="Success!", foreground='green').grid(row=5, columnspan=3, pady=10)
+        Label(window, text="Please select all files", foreground='blue').grid(row=5, columnspan=3, pady=10)
         for x in range(len(lst)):
             Label(window, text=f"{lst[x]}", foreground="blue").grid(row=x+5, columnspan=3, pady=10)
 
@@ -152,6 +141,7 @@ def run_program():
         font=("ariel", 10, "bold")
     )
     intake2_label.grid(row=3, column=0, padx=10)
+
     intake2_btn = Button(
         window,
         text="Choose File",
@@ -163,6 +153,7 @@ def run_program():
         text=""
     )
     intake2_file_label.grid(row=3, column=2)
+
     process_btn = Button(
         window,
         text="Process Files",
@@ -171,6 +162,7 @@ def run_program():
 
     )
     process_btn.grid(row=4, columnspan=3, pady=10)
+
     reset_button = Button(
         window,
         text="Reset",
@@ -178,7 +170,8 @@ def run_program():
         width=50,
 
     )
-    reset_button.grid(row=5, columnspan=3, pady=10)
+    reset_button.grid(row=6, columnspan=3, pady=50)
+
     window.mainloop()
 
 
