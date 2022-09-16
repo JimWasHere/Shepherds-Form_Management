@@ -6,12 +6,13 @@ import time
 import itertools
 import pyperclip
 
-intake = []
-mentee_responded = {}
-mentor_responded = {}
+
 
 
 def run_program():
+    intake = []
+    mentee_responded = {}
+    mentor_responded = {}
     window = Tk()
     window.title("Shepherds Form Management")
     window.geometry("850x600")
@@ -47,9 +48,10 @@ def run_program():
         emails = process_intake(intake)
 
         lst = fill_the_list(mentee_responded, mentor_responded, emails)
-        Label(window, text="Please select all files", foreground='blue').grid(row=5, columnspan=3, pady=10)
+        if not lst:
+            Label(window, text="Please select all files", foreground='blue').grid(row=5, columnspan=3, pady=10)
         for x in range(len(lst)):
-            Label(window, text=f"{lst[x]}", foreground="blue").grid(row=x+5, columnspan=3, pady=10)
+            Label(window, text=f"{lst[x]}", foreground="blue").grid(row=x+7, columnspan=3, pady=10)
 
     def mentee_to_dict():
         global mentee_responded
