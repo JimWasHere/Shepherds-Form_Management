@@ -6,19 +6,24 @@ import time
 import itertools
 import pyperclip
 
-
+intake = []
+mentee_responded = {}
+mentor_responded = {}
 
 
 def run_program():
-    intake = []
-    mentee_responded = {}
-    mentor_responded = {}
     window = Tk()
     window.title("Shepherds Form Management")
     window.geometry("850x600")
 
     def reset():
+        global mentee_responded
+        global mentor_responded
+        global intake
         window.destroy()
+        mentee_responded = {}
+        mentor_responded = {}
+        intake = []
         run_program()
 
     def fill_the_list(dictionary1, dictionary2, lst_to_check):
@@ -44,15 +49,6 @@ def run_program():
                     intake_emails.append(y.strip())
         return intake_emails
 
-    def process_files():
-        emails = process_intake(intake)
-
-        lst = fill_the_list(mentee_responded, mentor_responded, emails)
-        if not lst:
-            Label(window, text="Please select all files", foreground='blue').grid(row=5, columnspan=3, pady=10)
-        for x in range(len(lst)):
-            Label(window, text=f"{lst[x]}", foreground="blue").grid(row=x+7, columnspan=3, pady=10)
-
     def mentee_to_dict():
         global mentee_responded
         mentee_file = askopenfilename()
@@ -71,7 +67,20 @@ def run_program():
         mentor_names = [x.title() for x in list(mentor_feedback["Name"]) if isinstance(x, str)]
         mentor_emails = list(mentor_feedback["Email"])
         mentor_dict = {mentor_emails[x]: mentor_names[x] for x in range(len(mentor_names))}
-        mentor_responded = mentor_dict
+        return mentor_dict
+
+    def process_files():
+        emails = process_intake(intake)
+        lst = fill_the_list(mentee_responded, mentor_responded, emails)
+        if not lst:
+            Label(window, text="Please select all files", foreground='blue').grid(row=5, columnspan=3, pady=10)
+        for x in range(len(lst)):
+            Label(window, text=f"Click Button To Copy To Clipboard", foreground="blue").grid(row=6, columnspan=3, pady=10)
+            Button(
+                window,
+                text=f"{lst[x]}",
+                command=pyperclip.copy(lst[x])
+            ).grid(row=x+7, columnspan=3, padx=10, pady=10)
 
     def combine1():
         intake.append(askopenfilename())
@@ -172,7 +181,7 @@ def run_program():
         width=50,
 
     )
-    reset_button.grid(row=6, columnspan=3, pady=50)
+    reset_button.grid(row=5, columnspan=3, pady=50)
 
     window.mainloop()
 
