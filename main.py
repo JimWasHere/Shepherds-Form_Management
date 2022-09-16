@@ -1,10 +1,9 @@
 import pandas as pd
+import itertools
 from tkinter import *
 from tkinter.ttk import *
 from tkinter.filedialog import askopenfilename
-import time
-import itertools
-import pyperclip
+
 
 intake = []
 mentee_responded = {}
@@ -87,12 +86,9 @@ def run_program():
             Label(window, text="Use mouse wheel to scroll entire list", foreground="blue").grid(row=5, columnspan=3)
             Label(window, text=f"Double Click Address to Copy to Clipboard", font=("ariel", 20, "bold"),
                   foreground="blue").grid(row=8, columnspan=3, pady=10)
-            # Button(
-            #     window,
-            #     text=f"{lst[x]}",
-            #     command=pyperclip.copy(lst[x])
-            # ).grid(row=x+7, columnspan=3, padx=10, pady=10)
+
         result.grid(row=7, columnspan=3)
+
     def combine1():
         intake.append(askopenfilename())
         intake1_file_label.config(text=f"{intake[0]}")
