@@ -70,18 +70,29 @@ def run_program():
         return mentor_dict
 
     def process_files():
+        def listbox_copy(event):
+            window.clipboard_clear()
+            selected = result.get(first=ANCHOR)
+            window.clipboard_append(selected)
+
         emails = process_intake(intake)
         lst = fill_the_list(mentee_responded, mentor_responded, emails)
         if not lst:
-            Label(window, text="Please select all files", foreground='blue').grid(row=5, columnspan=3, pady=10)
-        for x in range(len(lst)):
-            Label(window, text=f"Click Button To Copy To Clipboard", foreground="blue").grid(row=6, columnspan=3, pady=10)
-            Button(
-                window,
-                text=f"{lst[x]}",
-                command=pyperclip.copy(lst[x])
-            ).grid(row=x+7, columnspan=3, padx=10, pady=10)
+            Label(window, text="Please select all files", font=("ariel", 30, "bold"), foreground='blue').grid(row=5, columnspan=3, pady=10)
 
+        result = Listbox(window, width=50)
+        result.bind('<Double-Button-1>', listbox_copy)
+        for x in range(len(lst)):
+            result.insert(END, f"{lst[x]}\n")
+            Label(window, text="Use mouse wheel to scroll entire list", foreground="blue").grid(row=5, columnspan=3)
+            Label(window, text=f"Double Click Address to Copy to Clipboard", font=("ariel", 20, "bold"),
+                  foreground="blue").grid(row=8, columnspan=3, pady=10)
+            # Button(
+            #     window,
+            #     text=f"{lst[x]}",
+            #     command=pyperclip.copy(lst[x])
+            # ).grid(row=x+7, columnspan=3, padx=10, pady=10)
+        result.grid(row=7, columnspan=3)
     def combine1():
         intake.append(askopenfilename())
         intake1_file_label.config(text=f"{intake[0]}")
@@ -89,6 +100,8 @@ def run_program():
     def combine2():
         intake.append(askopenfilename())
         intake2_file_label.config(text=f"{intake[1]}")
+
+
 
     mentor_feedback_label = Label(
         window,
@@ -181,7 +194,7 @@ def run_program():
         width=50,
 
     )
-    reset_button.grid(row=5, columnspan=3, pady=50)
+    reset_button.grid(row=10, columnspan=3, pady=50)
 
     window.mainloop()
 
